@@ -5,6 +5,9 @@ import { validarTokenOnHeader, esAdminRole } from "../middlewares/index.js";
 // Create a new instance of the Router class
 const demoRouter = Router();
 
+// Protect all routes with the middleware
+// demoRouter.use(validarTokenOnHeader);
+
 // Get method
 demoRouter.get("/", actionGET )
 
