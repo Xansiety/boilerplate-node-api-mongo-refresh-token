@@ -8,6 +8,25 @@ export const actionGET = (request, response) => {
     }); // Return a JSON object    
 }
 
+
+export const actionProtectedGET = (request, response) => {    
+    // Your logic here (interact with the database, etc.)
+    return response.status(200).json({
+        ok: true,
+        message: "Method GET Protected with JWT"
+    }); // Return a JSON object    
+}
+
+
+export const actionProtectedOnlyAdminGET = (request, response) => {    
+    // Your logic here (interact with the database, etc.)
+    return response.status(200).json({
+        ok: true,
+        message: "Method GET Protected with JWT for only admin"
+    }); // Return a JSON object    
+}
+
+
 export const actionPOST = (request, response) => {    
     // Your logic here (interact with the database, etc.)
     return response.status(200).json({

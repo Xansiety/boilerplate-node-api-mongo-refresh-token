@@ -3,16 +3,23 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 // Import your routes here
 import { demoRouter } from "../routes/demo-router.js";
+import { authRouter } from "../routes/authRouter.js";
+import { archivosRouter } from "../routes/archivosRouter.js";
 // Rate Limiting
 import rateLimit from "express-rate-limit";
 // Database Config
 import { openMongoDbConnection } from "../database/MongoDB/openMongoDbConnection.js";
+// loading files
+import fileUpload from "express-fileupload"
+
 
 class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 3000;
     this.demoPath = "/api/demo"; // Path for the demo router
+    this.authPath = "/api/auth"; // Path for the auth router
+    this.files = "/api/files"; // Path for the files router
 
     // Call the database
     this.ConnectToDatabase();
@@ -73,11 +80,24 @@ class Server {
 
     // Show a public folder
     // this.app.use(express.static("public"));
+
+
+    // manage files upload
+    this.app.use(
+      fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+        createParentPath: true /*Para crear la carpeta si no existe */,
+      })
+    )
+
   }
 
   // Routes
   Routes() {
     this.app.use(this.demoPath, demoRouter); 
+    this.app.use(this.authPath, authRouter);
+    this.app.use(this.files, archivosRouter);
   }
 
   // Start the server
