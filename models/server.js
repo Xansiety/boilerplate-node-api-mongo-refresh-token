@@ -39,7 +39,7 @@ class Server {
   // Middleware's
   Middlewares() {
     // CORS for everyone
-    // this.app.use(cors())
+    // this.app.use(cors()) 
     //CORS for a specific origins
     const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
     this.app.use(
